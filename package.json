@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/hexode/allure-playwright-test/issues"
   },
-  "homepage": "https://github.com/hexode/allure-playwright-test#readme"
+  "homepage": "https://github.com/hexode/allure-playwright-test#readme",
+  "engines": {
+    "node": "=16.15.0"
+  }
 }
