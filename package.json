@@ -1,38 +1,26 @@
 {
-  "name": "allure-playwright",
-  "version": "2.0.0-beta.15",
-  "description": "Allure Playwright integration",
-  "license": "Apache-2.0",
-  "author": {
-    "name": "Microsoft Corporation"
-  },
-  "repository": "https://github.com/allure-framework/allure-js",
-  "keywords": [
-    "playwright",
-    "allure"
-  ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "scripts": {
-    "clean": "rimraf ./dist ./out",
-    "compile": "tsc",
-    "generate-report": "allure generate ./out/allure-results -o ./out/allure-report --clean",
-    "allure-report": "allure serve ./out/allure-results",
-    "test": "playwright test -c test",
-    "lint": "eslint ./src --ext .ts",
-    "lint:fix": "eslint ./src --ext .ts --fix"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.18.0",
-    "eslint": "^7.32.0",
-    "prettier": "^2.3.2",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.4.2"
+  "name": "allure-playwright-test",
+  "version": "1.0.0",
+  "description": "This project implements Allure integration with [Playwright Test](https://playwright.dev) framework.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
   },
   "dependencies": {
-    "allure-js-commons": "workspace:*"
+    "allure-playwright": "^2.0.0-beta.15"
   },
-  "files": [
-    "dist"
-  ]
+  "devDependencies": {},
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hexode/allure-playwright-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hexode/allure-playwright-test/issues"
+  },
+  "homepage": "https://github.com/hexode/allure-playwright-test#readme"
 }
