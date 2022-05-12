@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/hexode/allure-playwright-test#readme",
   "engines": {
-    "node": "=16.15.0"
+    "node": "=16.14.2"
   }
 }
