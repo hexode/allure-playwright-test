@@ -1,7 +1,5 @@
 # allure-playwright
 
-This project implements Allure integration with [Playwright Test](https://playwright.dev) framework.
-
 ## Installation
 
 ```bash
