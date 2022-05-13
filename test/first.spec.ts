@@ -25,7 +25,7 @@ const Steps = {
 test('basic automated test', async ({ page }) => {
   allure.epic("Foo"); 
   allure.story("Story A");
-  allure.id('100')
+  allure.id('100');
 
   // arrange - подготовка
   await Steps.OpenPortal(page);
@@ -35,15 +35,21 @@ test('basic automated test', async ({ page }) => {
 
 
 test('basic test case', async ({ page }) => {
+  allure.id('101');
   allure.label({ name: "ALLURE_MANUAL", value: "true"});
   allure.epic("Foo"); 
   allure.story("Story B");
-  allure.id('101')
 
+  
   // arrange - подготовка
   await Steps.OpenPortal(page);
-  await test.step('[Act] Click "Start now"', async() => {});
-  await test.step('[Assert] Check top level title is "I want to"', async() => {});
+
+  await test.step('[Act] Click "Start now"', async() => {
+
+  });
+  await test.step('[Assert] Check top level title is "I want to"', async() => {
+
+  });
 });
 
 
