@@ -40,7 +40,6 @@ test('basic test case', async ({ page }) => {
   allure.epic("Foo"); 
   allure.story("Story B");
 
-  
   // arrange - подготовка
   await Steps.OpenPortal(page);
 
