@@ -25,7 +25,8 @@ const Steps = {
 test('basic automated test', async ({ page }) => {
   allure.epic("Foo"); 
   allure.story("Story A");
-  allure.label({ name: "AS_ID", value: "100"});
+  allure.label({ name: "testId", value: "100"});
+
 
   // arrange - подготовка
   await Steps.OpenPortal(page);
@@ -35,11 +36,11 @@ test('basic automated test', async ({ page }) => {
 
 
 test('basic test case', async ({ page }) => {
-  allure.label({ name: "AS_ID", value: "101"});
+  allure.label({ name: "testId", value: "101"});
   allure.label({ name: "ALLURE_MANUAL", value: "true"});
   allure.epic("Foo"); 
   allure.story("Story B");
-
+  allure.id
   // arrange - подготовка
   await Steps.OpenPortal(page);
 
