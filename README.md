@@ -1,5 +1,6 @@
 # allure-playwright
 
+
 ## Installation
 
 ```bash
