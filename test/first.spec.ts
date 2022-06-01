@@ -32,6 +32,8 @@ test('basic automated test', async ({ page }) => {
   allure.epic("Foo"); 
   allure.story("Story A");
 
+
+
   await Steps.OpenPortal(page);
   await Steps.ClickGetFreeDemo(page);
   await Checks.AssertTopLevelTitle(page, 'Live demos');
