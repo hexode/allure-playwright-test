@@ -7,7 +7,13 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
   },
-  reporter: [ ['allure-playwright', { outputFolder: 'allure-report' }] ],
+  reporter: [
+    ['dot'],
+    [
+
+      'allure-playwright', { outputFolder: 'allure-report' }
+    ]
+   ],
   projects: [
     {
       name: 'chromium',
