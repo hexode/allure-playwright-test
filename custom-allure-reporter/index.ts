@@ -1,57 +1,38 @@
 import AllureReporter from 'allure-playwright';
-import {Allure}
-import { TestCase, TestResult } from "@playwright/test/reporter";
+
+import {AllureStep, AllureRuntime} from 'allure-js-commons';
+import {TestCase, TestResult, TestStep } from '@playwright/test/reporter';
+
+declare module 'allure-playwright' {
+    export default interface AllureReporter {
+        onStepEnd(test: TestCase, result: TestResult, step: TestStep): void;
+        onTestEnd(test: TestCase, result: TestResult): void;
+        allureStepCache: Map<TestStep, AllureStep>
+        getAllureRuntime: () => AllureRuntime
+    }
+}
+
 
 export default class CustomAllureReporter extends AllureReporter {
-    // onTestEnd(test: TestCase, result: TestResult) {
-    //     super.onTestEnd(test, result);
+    onTestEnd(test: TestCase, result: TestResult) {
+        super.onTestEnd(test, result);
 
-    //     for (const attachment of result.attachments) {
-    //         if (!attachment.body && !attachment.path) {
-    //             continue;
-    //         }
+        const runtime = this.getAllureRuntime();
 
-    //         if (attachment.contentType === 'application/json') {
-    //             const [stepName, attachmentName, attachmentOptions] = JSON.parse(attachment.body.toString());
-                
-    //             // @ts-ignore
-    //             const pwStep = Array.from(this.allureStepCache.keys()).find(step => step.title === stepName)
+        for (const attachment of result.attachments) {
+            if (attachment.name.startsWith('e2e-step-metadata')) {
+                const [_, stepName, attachmentName] = attachment.name.split('{{SEP}}');
 
-    //             // @ts-ignore
-    //             var allureStep = this.allureStepCache.get(pwStep);
-              
-    //             allureStep.addAttachment()
+                const {body: content, contentType} = attachment;
 
-    //             // this.allureRuntime.createAttachment(attachmentName, attachmentOptions.body, 'image/png')
-                
-    //             continue;
-    //             // allureTest.info.steps.
-    //         }
+                const pwStep = Array.from(this.allureStepCache.keys()).find(step => step.title === stepName);
+                var allureStep = this.allureStepCache.get(pwStep);
+                const filename = runtime.writeAttachment(content, contentType);
 
-    //         if (attachment.contentType === 'application/json') {
-    //             if (!attachment.body) {
-    //                 continue;
-    //             }
-    //             const metadata = JSON.parse(attachment.body.toString());
-                
-    //             continue;
-    //         }
-
-
-
-    //         let fileName;
-    //         if (attachment.body) {
-    //             fileName = runtime.writeAttachment(attachment.body, attachment.contentType);
-    //         }
-    //         else {
-    //             if (!fs_1.default.existsSync(attachment.path)) {
-    //                 continue;
-    //             }
-    //             fileName = runtime.writeAttachmentFromPath(attachment.path, attachment.contentType);
-    //         }
-    //         allureTest.addAttachment(attachment.name, attachment.contentType, fileName);
-    //         if (attachment.name === "diff") {
-    //             allureTest.addLabel("testType", "screenshotDiff");
-           
-    // }
+                allureStep.addAttachment(attachmentName, contentType, filename);
+            }
+        }
+    }
 };
+
+

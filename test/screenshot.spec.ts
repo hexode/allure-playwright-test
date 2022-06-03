@@ -1,5 +1,6 @@
 import { test, expect, Page, TestInfo } from "@playwright/test";
 import { allure } from "allure-playwright";
+import { ContentType } from "allure-js-commons";
 
 const PO = {
   GetFreeDemoLink: '//a[.//*[text () = "Get free demo"]]',
@@ -21,16 +22,16 @@ const Checks = {
 
 const contentType = `application/json`;
 
-async function step(stepName: string, body: ({attach}: {attach: TestInfo['attach']}) => Promise<void>) {
+async function step(stepName: string, fn: ({attach}: {attach: TestInfo['attach']}) => Promise<void>) {
   const attach: TestInfo['attach'] = async (name, options) => {
-    test.info().attach("e2e-step-metadata", {
-      contentType: contentType,
-      body: Buffer.from(JSON.stringify([stepName, name, options]), "utf8"),
+    test.info().attach(`e2e-step-metadata{{SEP}}${stepName}{{SEP}}${name}`, {
+      contentType: options.contentType,
+      body: Buffer.from(options.body),
     });
   };
 
   await test.step(stepName, async () => {
-    await body({attach});
+    await fn({attach});
   });
 }
 
@@ -43,12 +44,15 @@ test('basic screenshot case', async ({ page}, testInfo) => {
     await Steps.OpenPortal(page);
 
     await step('Click get free demo', async ({attach}) => {
-  
+      const screenshotBuffer = await page.screenshot();
       await page.click(PO.GetFreeDemoLink);
 
-      const screenshotBuffer = await page.screenshot();
+      
 
-      await attach('screenshot', {body: screenshotBuffer});
+      await attach('attached_screenshot', {
+        body: screenshotBuffer,
+        contentType: ContentType.PNG
+      });
     });
 
     await expect(page).toHaveScreenshot('landing.png');

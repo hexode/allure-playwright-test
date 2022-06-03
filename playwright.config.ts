@@ -1,4 +1,5 @@
 import { PlaywrightTestConfig, devices } from '@playwright/test';
+import path from 'path';
 
 
 
@@ -12,8 +13,8 @@ const config: PlaywrightTestConfig = {
   reporter: [
     ['dot'],
     [
-      // `${path.resolve(process.cwd())}/custom-allure-reporter`, { outputFolder: 'allure-report' },
-      `allure-playwright`, { outputFolder: 'allure-report' }
+      `${path.resolve(process.cwd())}/custom-allure-reporter`, { outputFolder: 'allure-report' },
+      // `allure-playwright`, { outputFolder: 'allure-report' }
     ]
    ],
   projects: [

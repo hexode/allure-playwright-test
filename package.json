@@ -7,8 +7,9 @@
     "test": "test"
   },
   "dependencies": {
-    "allure-playwright": "^2.0.0-beta.15",
-    "@playwright/test": "1.22.2"
+    "@playwright/test": "1.22.2",
+    "allure-js-commons": "^2.0.0-beta.16",
+    "allure-playwright": "2.0.0-beta.15"
   },
   "scripts": {
     "test": "playwright test"
@@ -24,6 +25,6 @@
   },
   "homepage": "https://github.com/hexode/allure-playwright-test#readme",
   "engines": {
-    "node": "=16.14.2"
+    "node": "=16.15.0"
   }
 }
