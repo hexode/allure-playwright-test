@@ -26,13 +26,10 @@ const Checks = {
 };
 
 
-
 test('basic automated test', async ({ page }) => {
   allure.label({ name: "testId", value: "100"});
   allure.epic("Foo"); 
   allure.story("Story A");
-
-
 
   await Steps.OpenPortal(page);
   await Steps.ClickGetFreeDemo(page);
