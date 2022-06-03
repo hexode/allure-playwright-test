@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
     ['dot'],
     [
       // `${path.resolve(process.cwd())}/custom-allure-reporter`, { outputFolder: 'allure-report' },
-      `allure-reporter`, { outputFolder: 'allure-report' }
+      `allure-playwright`, { outputFolder: 'allure-report' }
     ]
    ],
   projects: [
