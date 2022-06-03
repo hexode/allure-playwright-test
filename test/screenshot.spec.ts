@@ -10,8 +10,7 @@ const Steps = {
     OpenPortal: (page: Page) => test.step('Open portal (toloka.ai)', async () => {
       await page.goto('https://toloka.ai');
     }),
-    ClickGetFreeDemo: (page: Page) => test.step('Click get free demo', async (...args) => {
-      console.log(args)
+    ClickGetFreeDemo: (page: Page) => test.step('Click get free demo', async () => {
       await page.click(PO.GetFreeDemoLink);
     }),
 };
@@ -36,7 +35,7 @@ async function step(stepName: string, body: ({attach}: {attach: TestInfo['attach
 }
 
 
-test.only('basic screenshot case', async ({ page}, testInfo) => {
+test('basic screenshot case', async ({ page}, testInfo) => {
     allure.label({ name: "testId", value: "102"});
     allure.epic("Foo"); 
     allure.story("Story B");
