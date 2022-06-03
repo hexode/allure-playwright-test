@@ -15,7 +15,7 @@ declare module 'allure-playwright' {
 
 export default class CustomAllureReporter extends AllureReporter {
     onTestEnd(test: TestCase, result: TestResult) {
-        super.onTestEnd(test, result);
+        
 
         const runtime = this.getAllureRuntime();
 
@@ -26,12 +26,16 @@ export default class CustomAllureReporter extends AllureReporter {
                 const {body: content, contentType} = attachment;
 
                 const pwStep = Array.from(this.allureStepCache.keys()).find(step => step.title === stepName);
-                var allureStep = this.allureStepCache.get(pwStep);
+                const allureStep = this.allureStepCache.get(pwStep);
                 const filename = runtime.writeAttachment(content, contentType);
 
                 allureStep.addAttachment(attachmentName, contentType, filename);
             }
         }
+
+        result.attachments = result.attachments.filter((attachment) => !attachment.name.startsWith('e2e-step-metadata'))
+
+        super.onTestEnd(test, result);
     }
 };
 
