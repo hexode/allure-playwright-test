@@ -16,13 +16,11 @@ declare module 'allure-playwright' {
 export default class CustomAllureReporter extends AllureReporter {
     onTestEnd(test: TestCase, result: TestResult) {
         
-
         const runtime = this.getAllureRuntime();
 
         for (const attachment of result.attachments) {
             if (attachment.name.startsWith('e2e-step-metadata')) {
                 const [_, stepName, attachmentName] = attachment.name.split('{{SEP}}');
-
                 const {body: content, contentType} = attachment;
 
                 const pwStep = Array.from(this.allureStepCache.keys()).find(step => step.title === stepName);
